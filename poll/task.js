@@ -1,10 +1,11 @@
 let xhr = new XMLHttpRequest();
 xhr.open(`GET`, `https://students.netoservices.ru/nestjs-backend/poll`);
+xhr.responseType = 'json';
 xhr.send();
 
 xhr.addEventListener(`readystatechange`, () => {
   if (xhr.readyState === xhr.DONE) {
-    const request = JSON.parse(xhr.response);
+    const request = xhr.response;
     const pullTitle = document.querySelector(`.poll__title`);
     const pullAnswers = document.querySelector(`.poll__answers`);
     pullTitle.textContent = request.data.title;
