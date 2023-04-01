@@ -1,12 +1,13 @@
 let xhr = new XMLHttpRequest();
 xhr.open(`GET`, `https://students.netoservices.ru/nestjs-backend/slow-get-courses`);
+xhr.responseType = 'json';
 xhr.send();
 
 xhr.addEventListener(`load`, () => {
   const loader = document.querySelector(`.loader_active`);
   loader.classList.remove(`loader_active`);
   const itemList = document.getElementById('items');
-  const request = JSON.parse(xhr.response);
+  const request = xhr.response;
   const requestValute = request.response[`Valute`];
   for (let valute in requestValute) {
     const currentValute = createItems(requestValute[valute].CharCode, requestValute[valute].Value);
